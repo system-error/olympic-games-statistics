@@ -1,6 +1,6 @@
 import csv
 
-olympic_games_file = open('../athlete_events.csv','r')
-
-for events in olympic_games_file:
-    print(events)
+with open('athlete_events.csv',mode='r') as csvfile:
+     olympic_games_file = csv.reader(csvfile)
+     for row in olympic_games_file:
+         print(', '.join(row))
