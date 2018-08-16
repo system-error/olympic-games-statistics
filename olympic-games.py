@@ -1,37 +1,59 @@
+from collections import Counter
 import csv
 
-with open('athlete_events.csv',mode='r') as csvfile:
+with open('athlete_events1.csv',mode='r') as csvfile:
     olympic_games_file = csv.DictReader(csvfile)
     teams_silver = set()
     teams_gold = set()
     teams_bronze = set()
-    medal_silver = set()
-    medal_gold = set()
-    medal_bronze = set()
+    goldlist = []
+    silverlist = []
+    bronzelist = []
+    counter_gold_metals_for_each_team = 0
+    counter_silver_metals_for_each_team = 0
+    counter_bronze_metals_for_each_team = 0
     counter_for_gold_medals = 0
     counter_for_silver_medals = 0
     counter_for_bronze_medals = 0    
     for row in olympic_games_file:
         team,medal = row["Team"],row["Medal"]
-        if medal =="Gold":    
+        if medal == "Gold":
+            goldlist.append(team)
             teams_gold.add(team)
-            medal_gold.add(medal)
             counter_for_gold_medals += 1
-        elif medal =="Silver":    
+        elif medal =="Silver":
+            silverlist.append(team)    
             teams_silver.add(team)
-            medal_silver.add(medal)
             counter_for_silver_medals += 1
         elif medal == "Bronze":
+            bronzelist.append(team)  
             teams_bronze.add(team)
-            medal_bronze.add(medal)
             counter_for_bronze_medals += 1
+    counter_gold_metals_for_each_team = Counter(goldlist)
+    counter_silver_metals_for_each_team = Counter(silverlist)
+    counter_bronze_metals_for_each_team = Counter(bronzelist)        
+    for key,value in counter_gold_metals_for_each_team.items():
+        if value == 1:
+            print("The team of %s won %d gold medal!\n" %(key,value))
+        else:
+            print("The team of %s won %d gold medals!\n" %(key,value))         
+    for key,value in counter_silver_metals_for_each_team.items():
+        if value == 1:
+            print("The team of %s won %d silver medal!\n" %(key,value))
+        else:
+            print("The team of %s won %d silver medals!\n" %(key,value))
+    for key,value in counter_bronze_metals_for_each_team.items():
+        if value == 1:
+            print("The team of %s won %d bronze medal!\n" %(key,value))
+        else:
+            print("The team of %s won %d bronze medals!\n" %(key,value))
+    print("The total medals are: %d" %counter_for_gold_medals)                        
     print(teams_gold)
-    print("gold medals: ",counter_for_gold_medals)
     print()
-    print(teams_bronze)
-    print("bronze medals: ",counter_for_bronze_medals)
     print()
+    print("The total medals are: %d" %counter_for_silver_medals)
     print(teams_silver)
-    print("silver medals: ",counter_for_silver_medals)
-    
-    
+    print()
+    print()
+    print("The total medals are: %d" %counter_for_bronze_medals)
+    print(teams_bronze)
