@@ -1,7 +1,7 @@
 from collections import Counter
 import csv
 
-with open('athlete_events1.csv',mode='r') as csvfile:
+with open('athlete_events.csv',mode='r') as csvfile:
     olympic_games_file = csv.DictReader(csvfile)
     teams_silver = set()
     teams_gold = set()
@@ -48,12 +48,12 @@ with open('athlete_events1.csv',mode='r') as csvfile:
         else:
             print("The team of %s won %d bronze medals!\n" %(key,value))
     print("The total medals are: %d" %counter_for_gold_medals)                        
-    print(teams_gold)
+    print("The list with teams that won gold medals: \n",teams_gold)
     print()
     print()
     print("The total medals are: %d" %counter_for_silver_medals)
-    print(teams_silver)
+    print("The list with teams that won silver medals: \n",teams_silver)
     print()
     print()
     print("The total medals are: %d" %counter_for_bronze_medals)
-    print(teams_bronze)
+    print("The list with teams that won bronze medals: \n",teams_bronze)
