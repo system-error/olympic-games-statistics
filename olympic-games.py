@@ -1,8 +1,6 @@
 from collections import Counter
 import csv
 
-
-
 with open('athlete_events1.csv',mode='r') as csvfile:
     olympic_games_file = csv.DictReader(csvfile)
     teams_silver = set()
