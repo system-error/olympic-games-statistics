@@ -1,5 +1,8 @@
 from collections import Counter
 import csv,re,time
+from itertools import chain
+import matplotlib.pyplot as plt
+import numpy as np
 start = time.time()
 
 with open('athlete_events.csv',mode='r') as csvfile:
@@ -40,30 +43,49 @@ with open('athlete_events.csv',mode='r') as csvfile:
     counter_gold_metals_for_each_team = Counter(goldlist)
     counter_silver_metals_for_each_team = Counter(silverlist)
     counter_bronze_metals_for_each_team = Counter(bronzelist)        
-    for key,value in counter_gold_metals_for_each_team.items():
-        if value == 1:
-            print("The team of %s won %d gold medal!\n" %(key,value))
+    for gold_key,gold_value in counter_gold_metals_for_each_team.items():
+        if gold_value == 1:
+            print("The team of %s won %d gold medal!\n" %(gold_key,gold_value))
         else:
-            print("The team of %s won %d gold medals!\n" %(key,value))
+            print("The team of %s won %d gold medals!\n" %(gold_key,gold_value))
     print("The total medals are: %d" %counter_for_gold_medals)                        
     print("The list with teams that won gold medals: \n",teams_gold)
     print()
     print()         
-    for key,value in counter_silver_metals_for_each_team.items():
-        if value == 1:
-            print("The team of %s won %d silver medal!\n" %(key,value))
+    for silver_key,silver_value in counter_silver_metals_for_each_team.items():
+        if silver_value == 1:
+            print("The team of %s won %d silver medal!\n" %(silver_key,silver_value))
         else:
-            print("The team of %s won %d silver medals!\n" %(key,value))        
+            print("The team of %s won %d silver medals!\n" %(silver_key,silver_value))        
     print("The total medals are: %d" %counter_for_silver_medals)
     print("The list with teams that won silver medals: \n",teams_silver)
     print()
     print()        
-    for key,value in counter_bronze_metals_for_each_team.items():
-        if value == 1:
-            print("The team of %s won %d bronze medal!\n" %(key,value))
+    for bronze_key,bronze_value in counter_bronze_metals_for_each_team.items():
+        if bronze_value == 1:
+            print("The team of %s won %d bronze medal!\n" %(bronze_key,bronze_value))
         else:
-            print("The team of %s won %d bronze medals!\n" %(key,value))      
+            print("The team of %s won %d bronze medals!\n" %(bronze_key,bronze_value))      
     print("The total medals are: %d" %counter_for_bronze_medals)
 print("The list with teams that won bronze medals: \n",teams_bronze)
+
+print()
+print()
+print()
+
+#b = set(chain(teams_gold,teams_silver,teams_bronze))
+#total = len(b)
+
+legend = ['Gold Medals For Each Team','Silver Medals For Each Team','Bronze Medals For Each Team']
+plt.hist([goldlist,silverlist,bronzelist], color=['orange','green','red'])
+plt.xlabel("List With Teams")
+plt.ylabel("Gold Medals For Each Team")
+plt.legend(legend)
+# plt.xticks(range(0,bins))
+# plt.yticks(range(1, gold_value))
+# plt.yticks(range(1, silver_value))
+# plt.yticks(range(1, bronze_value))
+# plt.savefig("abc.png")
+plt.show()
 
 print ('It took', time.time()-start, 'seconds.')
