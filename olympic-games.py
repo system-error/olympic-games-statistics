@@ -1,5 +1,6 @@
 from collections import Counter
-import csv,re
+import csv,re,time
+start = time.time()
 
 with open('athlete_events.csv',mode='r') as csvfile:
     olympic_games_file = csv.DictReader(csvfile)
@@ -32,7 +33,10 @@ with open('athlete_events.csv',mode='r') as csvfile:
             counter_for_bronze_medals += 1
     goldlist = [re.sub('[-0-9]', '', item) for item in goldlist]
     silverlist = [re.sub('[-0-9]', '', item) for item in silverlist] 
-    bronzelist = [re.sub('[-0-9]', '', item) for item in bronzelist]       
+    bronzelist = [re.sub('[-0-9]', '', item) for item in bronzelist]
+    teams_gold = set([re.sub('[-0-9]', '', s) for s in teams_gold]) 
+    teams_silver = set([re.sub('[-0-9]', '', s) for s in teams_silver])
+    teams_bronze = set([re.sub('[-0-9]', '', s) for s in teams_bronze])      
     counter_gold_metals_for_each_team = Counter(goldlist)
     counter_silver_metals_for_each_team = Counter(silverlist)
     counter_bronze_metals_for_each_team = Counter(bronzelist)        
@@ -61,3 +65,5 @@ with open('athlete_events.csv',mode='r') as csvfile:
             print("The team of %s won %d bronze medals!\n" %(key,value))      
     print("The total medals are: %d" %counter_for_bronze_medals)
 print("The list with teams that won bronze medals: \n",teams_bronze)
+
+print ('It took', time.time()-start, 'seconds.')
