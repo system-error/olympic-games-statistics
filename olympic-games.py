@@ -1,7 +1,7 @@
 from collections import Counter
-import csv,re
+import csv
 
-with open('athlete_events1.csv',mode='r') as csvfile:
+with open('athlete_events.csv',mode='r') as csvfile:
     olympic_games_file = csv.DictReader(csvfile)
     teams_silver = set()
     teams_gold = set()
@@ -19,18 +19,14 @@ with open('athlete_events1.csv',mode='r') as csvfile:
         team,medal = row["Team"],row["Medal"]
         if medal == "Gold":
             goldlist.append(team)
-            goldlist = [re.sub('[-0-9]', '', item) for item in goldlist]
             teams_gold.add(team)
-            # teams_gold = [re.sub('[-0-9]', '', item) for item in teams_gold]
             counter_for_gold_medals += 1
         elif medal =="Silver":
-            silverlist.append(team)
-            silverlist = [re.sub('[-0-9]', '', item) for item in silverlist]    
+            silverlist.append(team)    
             teams_silver.add(team)
             counter_for_silver_medals += 1
         elif medal == "Bronze":
-            bronzelist.append(team)
-            bronzelist = [re.sub('[-0-9]', '', item) for item in bronzelist]  
+            bronzelist.append(team)  
             teams_bronze.add(team)
             counter_for_bronze_medals += 1
     counter_gold_metals_for_each_team = Counter(goldlist)
