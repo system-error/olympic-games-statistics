@@ -19,20 +19,20 @@ with open('athlete_events.csv',mode='r') as csvfile:
         team,medal = row["Team"],row["Medal"]
         if medal == "Gold":
             goldlist.append(team)
-            goldlist = [re.sub('[-0-9]', '', item) for item in goldlist]
             teams_gold.add(team)
             # teams_gold = [re.sub('[-0-9]', '', item) for item in teams_gold]
             counter_for_gold_medals += 1
         elif medal =="Silver":
             silverlist.append(team)
-            silverlist = [re.sub('[-0-9]', '', item) for item in silverlist]    
             teams_silver.add(team)
             counter_for_silver_medals += 1
         elif medal == "Bronze":
-            bronzelist.append(team)
-            bronzelist = [re.sub('[-0-9]', '', item) for item in bronzelist]  
+            bronzelist.append(team)    
             teams_bronze.add(team)
             counter_for_bronze_medals += 1
+    goldlist = [re.sub('[-0-9]', '', item) for item in goldlist]
+    silverlist = [re.sub('[-0-9]', '', item) for item in silverlist] 
+    bronzelist = [re.sub('[-0-9]', '', item) for item in bronzelist]       
     counter_gold_metals_for_each_team = Counter(goldlist)
     counter_silver_metals_for_each_team = Counter(silverlist)
     counter_bronze_metals_for_each_team = Counter(bronzelist)        
@@ -60,4 +60,4 @@ with open('athlete_events.csv',mode='r') as csvfile:
         else:
             print("The team of %s won %d bronze medals!\n" %(key,value))      
     print("The total medals are: %d" %counter_for_bronze_medals)
-    print("The list with teams that won bronze medals: \n",teams_bronze)
+print("The list with teams that won bronze medals: \n",teams_bronze)
